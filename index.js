@@ -45,7 +45,9 @@ function mainMenu() {
                 updateEmployeeRole();
             } else if (answer.userChoice == "Add an employee") {
                 addEmployee();
-                
+            } else if (answer.userChoice == "View all roles") {
+                viewAllRoles();    
+
             } else {
                 process.exit(1)
             }
@@ -57,6 +59,15 @@ function viewAllDepartments() {
     connection.promise().query("SELECT * FROM department;")
         .then(function ([data]) {
             console.log("Showing all departments")
+            console.table(data);
+            mainMenu()
+        })
+}
+
+function viewAllRoles() {
+    connection.promise().query("SELECT * FROM role;")
+        .then(function ([data]) {
+            console.log("Showing all roles")
             console.table(data);
             mainMenu()
         })
