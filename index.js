@@ -46,7 +46,9 @@ function mainMenu() {
             } else if (answer.userChoice == "Add an employee") {
                 addEmployee();
             } else if (answer.userChoice == "View all roles") {
-                viewAllRoles();    
+                viewAllRoles();   
+            } else if (answer.userChoice == "Add a role") {
+                addRole();     
 
             } else {
                 process.exit(1)
@@ -95,6 +97,34 @@ function addDepartment() {
                 console.log("Added department")
                 mainMenu()
             })
+    })
+}
+
+function addRole() {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "roleName",
+            message: "What is the new role?"
+        }
+    ]).then(function (answer) {
+        connection.promise().query(`INSERT INTO role(title) VALUES ("${answer.role}");`)
+            .then(function ([data]) {
+                console.log("Added department")
+                mainMenu()
+            }).then(function () {
+                return inquirer.prompt([
+                    {
+                        type: "input",    
+                        name: "salary",
+                        message: "What is the salary of this new role?"
+                    }
+                ])
+            }).then(function (answer) {
+                connection.promise().query(`INSERT INTO role(salary) VALUES ("${answer.role}");`)
+                    .then(function ([data]) {
+                        console.log("Added Last Name")
+                    })
     })
 }
 
@@ -154,7 +184,7 @@ function addEmployee() {
                     })
                 mainMenu()
             })
-
+        })
     })
 }
 
