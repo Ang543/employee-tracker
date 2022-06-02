@@ -127,7 +127,7 @@ function addRole() {
                     })
     })
 }
-
+)} 
 function addEmployee() {
     inquirer.prompt([
         {
@@ -185,7 +185,7 @@ function addEmployee() {
                 mainMenu()
             })
         })
-    })
+    
 }
 
 function updateEmployeeRole() {
